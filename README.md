@@ -1,4 +1,4 @@
-# Windoo interview template
+# Windoo interview : KHADY GUEYE
 
 ## Requirements
 
@@ -27,3 +27,7 @@ Run these two commands in two separated terminals.
 - `npm run watch`
 
 You can now access your website on https://127.0.0.1:8000.
+
+
+
+
