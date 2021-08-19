@@ -13,7 +13,7 @@ class HomepageController extends AbstractController
     public function index(Request $request): Response
     {
         return $this->render('homepage/index.html.twig', [
-            'name' => $request->query->get('name', 'World'),
+            'name' => $request->query->get('name', 'Khady'),
         ]);
     }
 }
