@@ -1,0 +1,42 @@
+.form-container{
+    position: fixed;
+    width: 30%;
+    color: rgba(255, 255, 255, 0.582);
+    background-color: rgba(255, 255, 255, 0.164);
+    border: 1px solid rgba(255, 255, 255, 0.541);
+    border-top: 1px solid rgba(255, 255, 255, 0.192);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.253);
+    padding-left: 1%;
+    border-radius: 5px;
+    margin: 0% 10% 2% 0%;
+}
+
+.form-container input[type="text"],textarea{
+    width: 90%;
+    background-color: rgba(255, 255, 255, 0);
+    margin:5px;
+    padding: 2%;
+    font-size: 12px;
+    border-radius: 13px;
+    border: none;
+    border-bottom: 1px solid rgba(99, 206, 255, 0.253);
+    box-shadow: 2px 0.1px 2px 0.1px rgba(99, 206, 255, 0.253);
+}
+
+.form-container textarea{
+    height: 50%;
+}
+
+.form-container input[type="text"]::placeholder,textarea::placeholder{
+    color: rgb(255, 255, 255);
+}
+
+.form-container input[type="submit"]{
+    margin: 2% ;
+    background-color: rgba(0, 183, 255, 0.137);
+    color: white;
+    font-size: 12px;
+    padding: 5px 20px;
+    border: none;
+    border-radius: 5px;
+}

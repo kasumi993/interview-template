@@ -5,7 +5,7 @@
  * (and its CSS file) in your base layout (base.html.twig).
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import PostIdea from './components/PostIdea';
 import IdeaFlow from './components/IdeaFlow';
@@ -16,19 +16,27 @@ import './bootstrap';
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.css';
 
-//import images
-import logo from './images/logo.svg'
-
 
 const Component = ({props}) => {
-  console.log(props);
+  const [state, setState] = useState(props);
 
   return <div className="row">
-    <SideNavBar props={props.name}/>
-    <main className="col-10">
-      <div className="row-2 header"><img src={logo} alt="logo" width="130vw"/></div>
-      <PostIdea className="row-2 new-idea"/>
-      <IdeaFlow props={props.ideas} className="row-8 flow"/>
+    <div className="background"></div>
+    <aside className="col-2"> 
+      <SideNavBar />
+    </aside>
+    <main className="col">
+      <div className="container-fluid">
+        <h1 className="row welcome">Welcome back {state.name} !</h1>
+        <div className="row">
+          <div className="col-8">
+            <IdeaFlow props={state.ideas}/>
+          </div>
+          <div className="col">
+            <PostIdea/>
+          </div>
+        </div>
+      </div>  
     </main>
   </div>
  ;

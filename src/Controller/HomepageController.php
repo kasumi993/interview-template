@@ -9,15 +9,17 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Ideas;
 use App\Entity\User;
+use App\Entity\Votes;
 use App\Repository\UserRepository;
 use App\Repository\IdeasRepository;
+use App\Repository\VotesRepository;
 
 
 
 class HomepageController extends AbstractController
 {
     #[Route('', name: 'homepage')]
-    public function index(Request $request,EntityManagerInterface $manager,UserRepository $userRepo,IdeasRepository $ideaRepo): Response
+    public function index(Request $request,EntityManagerInterface $manager,UserRepository $userRepo,VotesRepository $VotesRepo,IdeasRepository $ideaRepo): Response
     {
 
 
@@ -63,12 +65,28 @@ $ideas=$ideaRepo->findAll();
 
 //#############  Gestion Envoi des données #########
 
+//traitement des données à envoyer
+        $ideaDetails=array();
+        
+        foreach($ideas as $idea){
+            $newIdea=[
+                "ideaTitle"=>$idea->getIdeaTitle(),
+                "ideaContent"=>$idea->getIdeaContent(),
+                "ideaAuthor"=>$idea->getIdeaAuthor()->getPseudo(),
+                "ideaDate"=>$idea->getCreatedAt(),
+                "ideaVotes"=>$idea->getVotesCount($VotesRepo),
+            ];
+            
+            $ideaDetails[]=$newIdea;
+        }
+
+
         return $this->render('homepage/index.html.twig', [
             //sending props
             'props'=>array(
                 //sending user name
                 'name' => $request->query->get('name', $user->getFirstName()),
-                'ideas' =>$ideas
+                'ideas' =>$ideaDetails,
             ),
         ]);
     }

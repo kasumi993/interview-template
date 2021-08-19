@@ -1,0 +1,24 @@
+aside{
+    position: relative;
+    display: inline-block;
+    color: white;
+    z-index: 5;
+    text-align: center;
+}
+
+.header{
+    padding-top: 15%;
+}
+
+.options ul{
+    display: inline-block;
+    list-style: none;
+    margin-top: 20vh;
+    font-size: 20px;
+}
+
+.options ul li{
+    margin-top: 5vh;
+    color: rgba(255, 255, 255, 0.753);
+}
+

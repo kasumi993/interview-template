@@ -74,4 +74,6 @@ class Votes
 
         return $this;
     }
+
+
 }

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\IdeasRepository;
+use App\Repository\VotesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -109,6 +110,16 @@ class Ideas
     public function getVotes(): Collection
     {
         return $this->votes;
+    }
+
+    public function getVotesCount(VotesRepository $VotesRepo){
+        $positive=$VotesRepo->findBy(["VoterRef"=>"id","voteType"=>"1"]);
+        $negative=$VotesRepo->findBy(["VoterRef"=>"id","voteType"=>"0"]);
+
+        $positiveNbr=array_count_values($positive);
+        $negativeNbr=array_count_values($negative);
+
+        return array($positiveNbr,$negativeNbr);
     }
 
     public function addVote(Votes $vote): self
