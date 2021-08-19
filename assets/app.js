@@ -7,6 +7,9 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PostIdea from './components/PostIdea';
+import IdeaFlow from './components/IdeaFlow';
+import SideNavBar from './components/SideNavBar';
 
 // start the Stimulus application
 import './bootstrap';
@@ -17,26 +20,20 @@ import './styles/app.css';
 import logo from './images/logo.svg'
 
 
-const Component = ({ name }) => 
-<div className="row">
-  <aside className="col-2">
-    <h1>Bienvenue {name} !</h1>
-    <div className="options">
-      <ol>
-        <li>Communaute</li>
-        <li>mes votes</li>
-      </ol>
-    </div>
-  </aside>
-  <main className="col-10">
-    <div className="row-2 header"><img src={logo} alt="logo" width="130vw"/></div>
-    <div className="row-2 new-idea">MindSyncing? Share your idea...</div>
-    <div className="row-8 flow">this is the main stuff</div>
-  </main>
-</div>
+const Component = ({props}) => {
+  console.log(props);
+
+  return <div className="row">
+    <SideNavBar props={props.name}/>
+    <main className="col-10">
+      <div className="row-2 header"><img src={logo} alt="logo" width="130vw"/></div>
+      <PostIdea className="row-2 new-idea"/>
+      <IdeaFlow props={props.ideas} className="row-8 flow"/>
+    </main>
+  </div>
  ;
 
-
+}
 
 const root = document.getElementById('react-root');
 ReactDOM.render(React.createElement(Component, JSON.parse(root.dataset.props)), root);

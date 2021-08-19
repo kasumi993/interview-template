@@ -1,5 +1,7 @@
 body {
     background-color: rgb(255, 255, 255);
+    margin: 0;
+    padding: 0;
 }
 
 aside{
@@ -9,4 +11,9 @@ aside{
 
 main{
     background-color: beige;
+}
+
+.header{
+    background-color: white;
+    margin:0;
 }
