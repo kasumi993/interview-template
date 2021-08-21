@@ -8,7 +8,7 @@ body {
 .background{
     width: 100vw;
     height: 100vh;
-    background-image: url(../images/19Z_2102.w026.n002.208B.p1.208.jpg);
+    background-image: url(../images/14383.jpg);
     position: fixed;
     background-size: cover;
     background-repeat: no-repeat;
@@ -24,10 +24,10 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    background-color: rgba(2, 14, 24, 0.37); /* Black background with opacity */
     z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
     cursor: pointer; /* Add a pointer on hover */
-      
+
 }
 
 main{

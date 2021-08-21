@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\IdeasRepository;
-use App\Repository\VotesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\User;
+use App\Entity\Votes;
 
 /**
  * @ORM\Entity(repositoryClass=IdeasRepository::class)
@@ -112,12 +112,20 @@ class Ideas
         return $this->votes;
     }
 
-    public function getVotesCount(VotesRepository $VotesRepo){
-        $positive=$VotesRepo->findBy(["VoterRef"=>"id","voteType"=>"1"]);
-        $negative=$VotesRepo->findBy(["VoterRef"=>"id","voteType"=>"0"]);
+    public function getVotesCount(){
+        $votes=$this->getVotes();
+        $voteType=array();
+        $positive=array();
+        $negative=array();
+        foreach($votes as $vote){
+            $vote=new Votes($vote);
+            $voteType[]=$vote->getVoteType();
+            $voteType==true ? $positive[]=$voteType : $negative[]=$voteType;
+        }
+        
 
-        $positiveNbr=array_count_values($positive);
-        $negativeNbr=array_count_values($negative);
+        $positiveNbr=count($positive);
+        $negativeNbr=count($negative);
 
         return array($positiveNbr,$negativeNbr);
     }
@@ -142,5 +150,21 @@ class Ideas
         }
 
         return $this;
+    }
+
+    /** 
+     * to recognize the ideas this user liked
+     * @param \App\Entity\User $user
+     * @return boolean
+    */
+
+
+    public function isLikedByUser(User $user):bool
+    {
+        foreach($this->votes as $vote){
+            
+            if($vote->getVoterRef() === $user) return true;
+        }
+        return false;
     }
 }

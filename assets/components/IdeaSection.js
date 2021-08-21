@@ -17,8 +17,8 @@ export default function PostIdea({props}){
         <div className="row meta">
             <div className="col"><i class="fa fa-user-circle"></i> {props.ideaAuthor}</div>
             <div className="col"><i class="fa fa-clock"></i> {props.ideaDate.date.toString().split(" ")[0]}</div>
-            <div className="col-2"><button className="button" onClick={handlePositiveVote}><i class="fa fa-thumbs-up"></i></button>  {props.ideaVotes[0][1]}</div>   
-            <div className="col-2"><button className="button" onClick={handleNegativeVote}><i class="fa fa-thumbs-down"></i></button>  {props.ideaVotes[0][1]} </div>   
+            <div className="col-2"><button className="button" onClick={handlePositiveVote}><i class={props.isLikedByUser ? "fa fa-thumbs-up liked" : "fa fa-thumbs-up"}></i></button>  {props.ideaVotes[0][1]}</div>   
+            <div className="col-2"><button className="button" onClick={handleNegativeVote}><i class={props.isLikedByUser ? "fa fa-thumbs-down unliked" : "fa fa-thumbs-down"}></i></button>  {props.ideaVotes[0][1]} </div>   
         </div>
     </div>
 }
