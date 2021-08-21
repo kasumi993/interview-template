@@ -191,7 +191,8 @@ foreach($ideas as $idea){
                 'code' => 200,
                 'message'=> 'Like was suppressed',
                 'action' => "delete",
-                'votes'=> $idea->getVotesCount()
+                'likes'=> $idea->getVotesCount()[0],
+                'dislikes'=> $idea->getVotesCount()[1],
             ],200)
             
             ;}
