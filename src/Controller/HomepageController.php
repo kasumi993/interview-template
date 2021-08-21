@@ -94,18 +94,52 @@ foreach($ideas as $idea){
 
 
 
-
-    #[Route('/liked/user/{pseudo}/{password}/{firstName}/{lastName}', name: 'create_user')]
+    #[Route('/create/{pseudo}/{password}/{firstName}/{lastName}', name: 'create_user')]
+    /**
+     * Create a user
+     *
+     * @param String $pseudo
+     * @param String $password
+     * @param String $firstName
+     * @param String $lastName
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
     public function createUser(String $pseudo,String $password,String $firstName,String $lastName,EntityManagerInterface $manager):Response
     {
         $user=new User();
-        $user->setId($request->request->get('title'))
-            ->setIdeaContent($request->request->get('content'))
-            ->setIdeaAuthor($user)
-            ->setCreatedAt(new \DateTimeImmutable('now'))
+        $user->setPseudo($pseudo)
+            ->setPassword($password)
+            ->setFirstName($firstName)
+            ->setLastName($lastName)
         ;
+
+        $manager->persist($user);
+        $manager->flush();
+
+        return $this->json([
+            'code' => 200,
+            'message'=> 'User have been created',
+        ],200);
     }
 
+
+
+    
+    #[Route('/suppress/user/{id}', name: 'suppress_user')]
+
+    public function suppressUser(String $id,EntityManagerInterface $manager,UserRepository $userRepo):Response
+    {
+        $user=$userRepo->findOneBy(["id"=>$id]);
+
+        $manager->remove($user);
+        $manager->flush();
+
+        return $this->json([
+            'code' => 200,
+            'message'=> 'User have been supressed',
+        ],200);
+    }
 
 
 
