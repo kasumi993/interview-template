@@ -20,6 +20,9 @@ import './styles/app.css';
 const Component = ({props}) => {
   const [state, setState] = useState(props);
 
+  //save user (no connection page; for test only)
+  localStorage.setItem('user', props.user);
+
   return <div className="row">
     <div className="background"></div>
     <aside className="col-2"> 

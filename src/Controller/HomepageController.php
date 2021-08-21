@@ -22,7 +22,7 @@ class HomepageController extends AbstractController
 
 
 //Je crée un utilisateur fictif pour l'instant pour ne pas gerer la connexion et l'inscription
-        $user=$userRepo->findOneBy(["id"=>"1"]);
+        $user=$userRepo->findOneBy(["id"=>"3"]);
 
 
 //########    idea CREATION Handler  #############
@@ -58,6 +58,7 @@ $ideaDetails=array();
         
 foreach($ideas as $idea){
     $newIdea=[
+        "id"=>$idea->getId(),
         "ideaTitle"=>$idea->getIdeaTitle(),
         "ideaContent"=>$idea->getIdeaContent(),
         "ideaAuthor"=>$idea->getIdeaAuthor()->getPseudo(),
@@ -189,6 +190,7 @@ foreach($ideas as $idea){
             return $this->json([
                 'code' => 200,
                 'message'=> 'Like was suppressed',
+                'action' => "delete",
                 'votes'=> $idea->getVotesCount()
             ],200)
             
@@ -206,6 +208,7 @@ foreach($ideas as $idea){
         return $this->json([
             "code"=>200,
             'message'=> 'Like was added',
+            'action' => "add",
             'ideas'=> $idea->getVotesCount(),
         ],200);
     }
@@ -238,7 +241,7 @@ foreach($ideas as $idea){
      //user repository will no longer be needed when we implement the connexion module
         public function suppress(String $id,EntityManagerInterface $manager,UserRepository $userRepo,IdeasRepository $ideaRepo):Response{
         
-        $user=$userRepo->findOneBy(["id"=>"1"]);
+        $user=$userRepo->findOneBy(["id"=>"3"]);
     
         //get the request
             // //create a new idea object
