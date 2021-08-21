@@ -21,7 +21,7 @@ const Component = ({props}) => {
   const [state, setState] = useState(props);
 
   //save user (no connection page; for test only)
-  localStorage.setItem('user', props.user);
+  localStorage.setItem('user', props.name);
 
   return <div className="row">
     <div className="background"></div>

@@ -61,7 +61,7 @@ foreach($ideas as $idea){
         "id"=>$idea->getId(),
         "ideaTitle"=>$idea->getIdeaTitle(),
         "ideaContent"=>$idea->getIdeaContent(),
-        "ideaAuthor"=>$idea->getIdeaAuthor()->getPseudo(),
+        "ideaAuthor"=>$idea->getIdeaAuthor()->getFirstName(),
         "ideaDate"=>$idea->getCreatedAt(),
         "ideaVotes"=>$idea->getVotesCount($VotesRepo),
         'isLikedByUser' =>$idea->isLikedByUser($user),

@@ -5,6 +5,7 @@ import axios from 'axios';
 export default function IdeaSection({props}){
     const likeButton = useRef();
     const dislikeButton = useRef();
+    const idea=useRef();
     const user=localStorage.getItem('user');
  
 
@@ -40,14 +41,29 @@ export default function IdeaSection({props}){
         })
     }
 
-    return <div className="ideaBox container col">
-        <div className="row title">{props.ideaTitle}</div>
+
+    function handleSuppressIdea(event){
+        event.preventDefault();
+        const url="/idea/suppress/"+props.id;
+        axios.get(url).then(function(response){
+            console.log(response);
+            idea.current.style.display="none";
+        })
+    }
+
+
+
+    return <div ref={idea}  className="ideaBox container col">
+        <div className="row">
+        <div className="col title">{props.ideaTitle}</div>
+        {user==props.ideaAuthor ? <div className="col-2"><button onClick={handleSuppressIdea}><i className="fa fa-trash"></i></button> </div> : <div></div>  } 
+        </div>
         <div className="row content">{props.ideaContent}</div>
         <div className="row meta">
             <div className="col"><i className="fa fa-user-circle"></i> {props.ideaAuthor}</div>
             <div className="col"><i className="fa fa-clock"></i> {props.ideaDate.date.toString().split(" ")[0]}</div>
             <div className="col-2" ><button  className="button" onClick={handlePositiveVote}><i ref={likeButton} className="fa fa-thumbs-up like"> {props.ideaVotes[0]}</i></button></div>   
-            <div className="col-2"><button  className="button" onClick={handleNegativeVote}><i ref={dislikeButton} className="fa fa-thumbs-down dislike"> {props.ideaVotes[1]}</i></button>   </div>   
+            <div className="col-2"><button  className="button" onClick={handleNegativeVote}><i ref={dislikeButton} className="fa fa-thumbs-down dislike"> {props.ideaVotes[1]}</i></button> </div>   
         </div>
     </div>
 }
